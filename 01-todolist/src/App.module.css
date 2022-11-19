@@ -1,0 +1,11 @@
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapperForm {
+  position: relative;
+  top: -25px;
+  max-width: 736px;
+  flex: 1;
+}
