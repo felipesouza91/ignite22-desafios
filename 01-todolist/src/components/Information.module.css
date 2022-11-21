@@ -1,0 +1,29 @@
+.contaioner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.text {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.text_secondary {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--purple);
+}
+
+.badge {
+  background-color: var(--gray-400);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.badge > span {
+  font-size: 0.75rem;
+  color: var(--gray-200);
+}
