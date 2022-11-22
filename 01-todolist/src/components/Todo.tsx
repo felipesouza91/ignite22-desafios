@@ -8,20 +8,29 @@ type ITodoDto = {
 
 type ITodoProps = {
   data: ITodoDto;
+  onChangeStatus: (item: ITodoDto) => void;
+  onDelete: (item: ITodoDto) => void;
 };
 
-const Todo: React.FC<ITodoProps> = ({ data }) => {
+const Todo: React.FC<ITodoProps> = ({ data, onChangeStatus, onDelete }) => {
   return (
     <div className={styles.container}>
-      <button>
+      <button
+        className={data.isComplete ? styles.check : styles.circle}
+        onClick={() => onChangeStatus(data)}
+      >
         {data.isComplete ? (
-          <CheckCircle size={24} color="#8284fa" weight="fill" />
+          <CheckCircle size={24} weight="fill" />
         ) : (
-          <Circle size={24} color="#4ea8de" />
+          <Circle size={24} />
         )}
       </button>
-      <p className={ data.isComplete ?  styles.textComplete: styles.text}>{data.description}</p>
-      <Trash size={24} color="#808080" />
+      <p className={data.isComplete ? styles.textComplete : styles.text}>
+        {data.description}
+      </p>
+      <button className={styles.trash} onClick={() => onDelete(data)}>
+        <Trash size={24} />
+      </button>
     </div>
   );
 };

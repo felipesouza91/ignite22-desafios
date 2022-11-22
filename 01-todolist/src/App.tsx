@@ -3,7 +3,7 @@ import { Header } from './components/Header';
 import styles from './App.module.css';
 import Information from './components/Information';
 import { ClipboardText } from 'phosphor-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Todo from './components/Todo';
 
 type ITodo = {
@@ -11,52 +11,66 @@ type ITodo = {
   isComplete: boolean;
 };
 
-const test: ITodo[] = [
-  {
-    description:
-      'Voluptate culpa Lorem pariatur id enim ut ipsum in minim est incididunt ut laborum dolore.',
-    isComplete: true,
-  },
-  {
-    description:
-      'Officia amet nostrud labore exercitation velit sint nulla officia consequat nulla do consectetur.',
-    isComplete: false,
-  },
-  {
-    description:
-      'Minim nisi ea id veniam aute consectetur voluptate cupidatat.',
-    isComplete: true,
-  },
-  {
-    description:
-      'Enim irure laborum et veniam id officia ut nisi aliquip. Enim quis anim sint culpa incididunt. Ullamco culpa laborum deserunt veniam consequat sint enim. Nostrud cillum ex aliquip enim nisi. Veniam est fugiat irure tempor. Cupidatat sit excepteur magna quis id eiusmod aute aliquip incididunt exercitation enim.',
-    isComplete: true,
-  },
-];
-
 const App: React.FC = () => {
-  const [todoList, setTodoList] = useState<ITodo[]>(test);
+  const [todoList, setTodoList] = useState<ITodo[]>([]);
+
+  const totalTodo = useMemo(() => todoList.length, [todoList]);
+  const todoCompleteSize = useMemo(
+    () => todoList.filter((item) => item.isComplete).length,
+    [todoList]
+  );
+
+  function handleCreateTodo(description: string) {
+    setTodoList([...todoList, { description, isComplete: false }]);
+  }
+
+  function handleChangeStatus(todo: ITodo) {
+    const newTodoList = todoList.map((item) => {
+      if (todo.description === item.description) {
+        item.isComplete = !item.isComplete;
+        return item;
+      }
+      return item;
+    });
+    setTodoList(newTodoList);
+  }
+
+  function handleDelete(todo: ITodo) {
+    const newTodoList = todoList.filter(
+      (item) => item.description != todo.description
+    );
+    setTodoList(newTodoList);
+  }
+
   return (
     <>
       <Header />
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.wrapperForm}>
-            <FormTask />
+            <FormTask onSave={handleCreateTodo} />
           </div>
           <section>
             <div className={styles.info}>
-              <Information label="Tarefas Criadas" badgeText="0" />
+              <Information
+                label="Tarefas Criadas"
+                badgeText={totalTodo.toString()}
+              />
               <Information
                 label="Concluídas"
-                badgeText="2 de 5"
+                badgeText={`${todoCompleteSize} de ${totalTodo}`}
                 type="secondary"
               />
             </div>
             {todoList.length > 0 ? (
               <div className={styles.todoList}>
                 {todoList.map((item) => (
-                  <Todo key={item.description} data={item} />
+                  <Todo
+                    key={item.description}
+                    data={item}
+                    onChangeStatus={handleChangeStatus}
+                    onDelete={handleDelete}
+                  />
                 ))}
               </div>
             ) : (
