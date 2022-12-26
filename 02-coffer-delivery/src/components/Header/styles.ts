@@ -40,16 +40,4 @@ export const Location = styled.div`
     line-height: 130%;
   }
 `;
-export const IconButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  padding: 8px;
-  border: none;
-  border-radius: 6px;
-  background: ${({ theme }) => theme['yellow-light']};
-  color: ${({ theme }) => theme['yellow-dark']};
-  cursor: pointer;
-`;
+

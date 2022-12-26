@@ -8,6 +8,7 @@ type IconContainerProps = {
 export const HomeContainer = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: column;
 `;
 
 export const IntoContainer = styled.div`
@@ -71,4 +72,21 @@ export const IconContainer = styled.div<IconContainerProps>`
 export const InfoImage = styled.img`
   width: 476px;
   height: 360px;
+`;
+
+export const HomeSubTitle = styled.h4`
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 130%;
+  color: ${({ theme }) => theme['base-subtitle']};
+  margin-bottom: 34px;
+`;
+
+export const CoffeeList = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 154px;
 `;

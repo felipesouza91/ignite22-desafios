@@ -11,7 +11,10 @@ import {
   BuyInfos,
   BuyInfoDescription,
   InfoImage,
+  HomeSubTitle,
+  CoffeeList,
 } from './styles';
+import CoffeeCard from '../../components/CoffeeCard';
 
 const Home: React.FC = () => {
   return (
@@ -52,6 +55,16 @@ const Home: React.FC = () => {
         </InfoSection>
         <InfoImage src={HomeImage} />
       </IntoContainer>
+      <HomeSubTitle>Nossos Cafés</HomeSubTitle>
+      <CoffeeList>
+        <CoffeeCard />
+        <CoffeeCard />
+        <CoffeeCard />
+        <CoffeeCard />
+        <CoffeeCard />
+        <CoffeeCard />
+        <CoffeeCard />
+      </CoffeeList>
     </HomeContainer>
   );
 };

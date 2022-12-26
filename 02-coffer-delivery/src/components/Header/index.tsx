@@ -7,8 +7,8 @@ import {
   HeaderSuffix,
   Location,
   NavContainer,
-  IconButton,
 } from './styles';
+import IconButton from '../IconButton';
 
 const Header: React.FC = () => {
   return (
@@ -20,9 +20,10 @@ const Header: React.FC = () => {
             <MapPin size={22} weight="fill" />
             <span>Porto Alegre, RS</span>
           </Location>
-          <IconButton>
-            <ShoppingCart size={22} weight="fill" />
-          </IconButton>
+          <IconButton
+            backgroundColor="yellow-light"
+            icon={<ShoppingCart size={22} weight="fill" />}
+          />
         </HeaderSuffix>
       </NavContainer>
     </HeaderContainer>
