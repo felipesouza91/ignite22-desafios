@@ -59,7 +59,7 @@ export const Price = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  font-family: 'Boloo 2', sans-serif;
+  font-family: 'Baloo 2', sans-serif;
   font-size: 24px;
   gap: 4px;
   font-weight: 800;
