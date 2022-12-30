@@ -1,16 +1,14 @@
 import React from 'react';
 
 import { LayoutContainer } from './styles';
-import { Home } from '../pages/Home';
-import { Header } from '../components/Header';
-import { Checkout } from '../pages/Checkout';
-import { Success } from './../pages/Success/index';
 
+import { Header } from '../components/Header';
+import { Outlet } from 'react-router-dom';
 const DefaultLayout: React.FC = () => {
   return (
     <LayoutContainer>
       <Header />
-      <Success />
+      <Outlet />
     </LayoutContainer>
   );
 };

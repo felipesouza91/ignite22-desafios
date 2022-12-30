@@ -1,5 +1,7 @@
 import React from 'react';
 import { MapPin, ShoppingCart } from 'phosphor-react';
+import { Link } from 'react-router-dom';
+
 import LogoImg from '../../assets/Logo.svg';
 import {
   HeaderContainer,
@@ -14,16 +16,20 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <NavContainer>
-        <Image src={LogoImg} />
+        <Link to="/">
+          <Image src={LogoImg} />
+        </Link>
         <HeaderSuffix>
           <Location>
             <MapPin size={22} weight="fill" />
             <span>Porto Alegre, RS</span>
           </Location>
-          <IconButton
-            backgroundColor="yellow-light"
-            icon={<ShoppingCart size={22} weight="fill" />}
-          />
+          <Link to="/checkout">
+            <IconButton
+              backgroundColor="yellow-light"
+              icon={<ShoppingCart size={22} weight="fill" />}
+            />
+          </Link>
         </HeaderSuffix>
       </NavContainer>
     </HeaderContainer>
