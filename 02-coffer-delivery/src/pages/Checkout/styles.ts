@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+interface PaymentOptionProps {
+  isSelected?: boolean;
+}
+
 export const CheckoutContainer = styled.div`
   display: grid;
   grid-template-columns: auto 448px;
@@ -73,5 +77,59 @@ export const InlineGroup = styled.div`
 
   &:first-child {
     flex: 1;
+  }
+`;
+
+export const PaymentInfo = styled.div`
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: ${({ theme }) => theme['base-card']};
+  border-radius: 6px;
+`;
+
+export const PaymentMessageGroup = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+
+  & > svg {
+    color: ${({ theme }) => theme.purple};
+  }
+`;
+
+export const PaymentOptions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const PaymentOption = styled.button<PaymentOptionProps>`
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  background: ${({ theme }) => theme['base-button']};
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 160%;
+  color: ${({ theme }) => theme['base-text']};
+
+  & > svg {
+    color: ${({ theme }) => theme.purple};
+  }
+
+  ${({ theme, isSelected }) =>
+    isSelected &&
+    css`
+      background: ${theme['purple-light']};
+      border: 1px solid ${theme.purple};
+    `}
+
+  &:hover {
+    background: ${({ theme }) => theme['base-hover']};
   }
 `;

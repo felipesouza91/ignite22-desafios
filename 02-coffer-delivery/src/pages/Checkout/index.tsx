@@ -1,4 +1,11 @@
-import { CurrencyDollar, MapPin } from 'phosphor-react';
+import {
+  Bank,
+  Cardholder,
+  CreditCard,
+  CurrencyDollar,
+  MapPin,
+  Money,
+} from 'phosphor-react';
 import React from 'react';
 import { Input } from '../../components/Input';
 import {
@@ -12,6 +19,10 @@ import {
   Text,
   AddressForm,
   InlineGroup,
+  PaymentInfo,
+  PaymentMessageGroup,
+  PaymentOptions,
+  PaymentOption,
 } from './styles';
 
 const Checkout: React.FC = () => {
@@ -52,9 +63,18 @@ const Checkout: React.FC = () => {
             </SubTitleGroup>
           </PaymentMessageGroup>
           <PaymentOptions>
-            <PaymentButton>CARTÃO DE CREDITO</PaymentButton>
-            <PaymentButton>CARTÃO DE CREDITO</PaymentButton>
-            <PaymentButton>CARTÃO DE CREDITO</PaymentButton>
+            <PaymentOption>
+              <CreditCard size={16} />
+              CARTÃO DE CREDITO
+            </PaymentOption>
+            <PaymentOption>
+              <Bank size={16} />
+              CARTÃO DE CREDITO
+            </PaymentOption>
+            <PaymentOption isSelected>
+              <Money size={16} />
+              CARTÃO DE CREDITO
+            </PaymentOption>
           </PaymentOptions>
         </PaymentInfo>
       </CheckoutInfos>
