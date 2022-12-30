@@ -133,3 +133,113 @@ export const PaymentOption = styled.button<PaymentOptionProps>`
     background: ${({ theme }) => theme['base-hover']};
   }
 `;
+
+export const CheckoutResume = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+export const ResumeCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+
+  background: ${({ theme }) => theme['base-card']};
+  border-radius: 6px 44px;
+`;
+
+export const ProductWrapper = styled.div`
+  width: 100%;
+  padding: 24px 0;
+  border-bottom: 1px solid ${({ theme }) => theme['base-button']};
+
+  &:first-child {
+    padding: 0 0 24px 0;
+  }
+`;
+
+export const PricesDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin: 24px 0;
+`;
+
+export const TotalItemValueText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > span {
+    color: ${({ theme }) => theme['base-text']};
+    line-height: 130%;
+  }
+
+  & > span:first-child {
+    font-size: 14px;
+  }
+
+  & > span:last-child {
+    font-size: 16px;
+  }
+`;
+
+export const DeliveryValueText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > span {
+    color: ${({ theme }) => theme['base-text']};
+    line-height: 130%;
+  }
+
+  & > span:first-child {
+    font-size: 14px;
+  }
+
+  & > span:last-child {
+    font-size: 16px;
+  }
+`;
+
+export const TotalText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > span {
+    color: ${({ theme }) => theme['base-subtitle']};
+    line-height: 130%;
+    font-weight: bold;
+  }
+
+  & > span:first-child {
+    font-size: 20px;
+  }
+
+  & > span:last-child {
+    font-size: 16px;
+  }
+`;
+
+export const Button = styled.button`
+  width: 100%;
+  padding: 12px 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  background: ${({ theme }) => theme.yellow};
+  font-size: 14px;
+  color: ${({ theme }) => theme.white};
+  line-height: 130%;
+  font-weight: 700;
+
+  &:hover {
+    background: ${({ theme }) => theme['yellow-dark']};
+  }
+`;

@@ -10,9 +10,8 @@ import {
   Description,
   Footer,
   Price,
-  QuantityInputGroup,
-  QuantityInput,
 } from './styles';
+import QuantityInput from '../QuantityInput';
 
 const CoffeeCard: React.FC = () => {
   return (
@@ -27,15 +26,7 @@ const CoffeeCard: React.FC = () => {
         <Price>
           <span>R$</span> 9,90
         </Price>
-        <QuantityInputGroup>
-          <button>
-            <Minus weight="bold" />
-          </button>
-          <QuantityInput type="input" />
-          <button>
-            <Plus weight="bold" />
-          </button>
-        </QuantityInputGroup>
+        <QuantityInput />
         <IconButton
           backgroundColor="purple-dark"
           icon={<ShoppingCart size={20} weight="fill" />}

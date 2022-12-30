@@ -8,6 +8,7 @@ import {
 } from 'phosphor-react';
 import React from 'react';
 import { Input } from '../../components/Input';
+import ProductCard from './ProductCard';
 import {
   CheckoutContainer,
   CheckoutInfos,
@@ -23,6 +24,14 @@ import {
   PaymentMessageGroup,
   PaymentOptions,
   PaymentOption,
+  CheckoutResume,
+  ResumeCard,
+  ProductWrapper,
+  PricesDescription,
+  TotalItemValueText,
+  DeliveryValueText,
+  TotalText,
+  Button,
 } from './styles';
 
 const Checkout: React.FC = () => {
@@ -78,8 +87,37 @@ const Checkout: React.FC = () => {
           </PaymentOptions>
         </PaymentInfo>
       </CheckoutInfos>
+      <CheckoutResume>
+        <Title>Cafés selecionados</Title>
+        <ResumeCard>
+          <ProductWrapper>
+            <ProductCard />
+          </ProductWrapper>
+          <ProductWrapper>
+            <ProductCard />
+          </ProductWrapper>
+          <ProductWrapper>
+            <ProductCard />
+          </ProductWrapper>
+          <PricesDescription>
+            <TotalItemValueText>
+              <span>Total de itens</span>
+              <span>R$ 29,70</span>
+            </TotalItemValueText>
+            <DeliveryValueText>
+              <span>Entrega</span>
+              <span>R$ 3,50</span>
+            </DeliveryValueText>
+            <TotalText>
+              <span>Total</span>
+              <span>R$ 33,20</span>
+            </TotalText>
+          </PricesDescription>
+          <Button>CONFIRMAR PEDIDO</Button>
+        </ResumeCard>
+      </CheckoutResume>
     </CheckoutContainer>
   );
 };
 
-export default Checkout;
+export { Checkout };
