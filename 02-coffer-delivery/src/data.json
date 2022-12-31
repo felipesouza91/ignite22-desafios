@@ -1,0 +1,52 @@
+{
+  "coffes": [
+    {
+      "id": "1",
+      "imgUrl": "",
+      "type": ["TRADICIONAL"],
+      "name": "Expresso Tradicional",
+      "description": "O tradicional café feito com água quente e grãos moídos",
+      "price": 9.9
+    },
+    {
+      "id": "2",
+      "imgUrl": "",
+      "type": ["TRADICIONAL"],
+      "name": "Expresso Americano",
+      "description": "Expresso diluído, menos intenso que o tradicional",
+      "price": 9.9
+    },
+    {
+      "id": "3",
+      "imgUrl": "",
+      "type": ["TRADICIONAL"],
+      "name": "Expresso Cremoso",
+      "description": "Café expresso tradicional com espuma cremosa",
+      "price": 9.9
+    },
+    {
+      "id": "4",
+      "imgUrl": "",
+      "type": ["TRADICIONAL", "GELADO"],
+      "name": "Expresso Geladoo",
+      "description": "Bebida preparada com café expresso e cubos de gelo",
+      "price": 9.9
+    },
+    {
+      "id": "5",
+      "imgUrl": "",
+      "type": ["TRADICIONAL", "COM LEITE"],
+      "name": "Latte",
+      "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+      "price": 9.9
+    },
+    {
+      "id": "6",
+      "imgUrl": "",
+      "type": ["TRADICIONAL", "COM LEITE", "ALCOÓLICO"],
+      "name": "Cubano",
+      "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
+      "price": 9.9
+    }
+  ]
+}

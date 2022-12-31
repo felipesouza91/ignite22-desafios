@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HomeImage from '../../assets/HomeImage.png';
 import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react';
 import {
@@ -16,7 +16,24 @@ import {
 } from './styles';
 import CoffeeCard from '../../components/CoffeeCard';
 
+import data from '../../data.json';
+
+interface CoffeeDTO {
+  id: string;
+  imgUrl: string;
+  type: string[];
+  name: string;
+  description: string;
+  price: number;
+}
+
 const Home: React.FC = () => {
+  const [cart, setCart] = useState([]);
+
+  function handleAdcCart(data: any) {
+    console.log(data);
+  }
+
   return (
     <HomeContainer>
       <IntoContainer>
@@ -57,13 +74,9 @@ const Home: React.FC = () => {
       </IntoContainer>
       <HomeSubTitle>Nossos Cafés</HomeSubTitle>
       <CoffeeList>
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
+        {data.coffes.map((coffee: CoffeeDTO) => (
+          <CoffeeCard key={coffee.id} data={coffee} onAdd={handleAdcCart} />
+        ))}
       </CoffeeList>
     </HomeContainer>
   );

@@ -18,6 +18,16 @@ export const CardImage = styled.img`
   position: relative;
 `;
 
+export const CoffeeTypeRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const CoffeeType = styled.span`
   padding: 4px 8px;
   background: ${({ theme }) => theme['yellow-light']};
@@ -26,7 +36,6 @@ export const CoffeeType = styled.span`
   color: ${({ theme }) => theme['yellow-dark']};
   font-weight: 700;
   border-radius: 13px;
-  margin-bottom: 16px;
 `;
 
 export const Title = styled.span`
@@ -71,4 +80,3 @@ export const Price = styled.div`
     font-weight: 400;
   }
 `;
-

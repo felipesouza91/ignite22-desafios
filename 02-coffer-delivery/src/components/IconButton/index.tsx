@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { IconButtonContainer } from './styles';
 
-interface IconButtonProps {
+interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: React.ReactElement;
   backgroundColor: 'yellow-light' | 'purple-dark';
 }
 
-const IconButton: React.FC<IconButtonProps> = ({ icon, backgroundColor }) => {
+const IconButton: React.FC<IconButtonProps> = ({
+  icon,
+  backgroundColor,
+  ...rest
+}) => {
   return (
-    <IconButtonContainer bgColor={backgroundColor}>{icon}</IconButtonContainer>
+    <IconButtonContainer bgColor={backgroundColor} {...rest}>
+      {icon}
+    </IconButtonContainer>
   );
 };
 
