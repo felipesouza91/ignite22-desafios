@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MapPin, ShoppingCart } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 
@@ -11,8 +11,10 @@ import {
   NavContainer,
 } from './styles';
 import IconButton from '../IconButton';
+import { CarContext } from './../../context/CartContext';
 
 const Header: React.FC = () => {
+  const { carItens } = useContext(CarContext);
   return (
     <HeaderContainer>
       <NavContainer>
@@ -26,6 +28,7 @@ const Header: React.FC = () => {
           </Location>
           <Link to="/checkout">
             <IconButton
+              bagdeText={carItens.length}
               backgroundColor="yellow-light"
               icon={<ShoppingCart size={22} weight="fill" />}
             />

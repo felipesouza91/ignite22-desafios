@@ -1,14 +1,14 @@
+import React, { useContext } from 'react';
 import {
   Bank,
-  Cardholder,
   CreditCard,
   CurrencyDollar,
   MapPin,
   Money,
 } from 'phosphor-react';
-import React from 'react';
 import { Input } from '../../components/Input';
 import ProductCard from './ProductCard';
+import { CarContext } from './../../context/CartContext';
 import {
   CheckoutContainer,
   CheckoutInfos,
@@ -35,6 +35,7 @@ import {
 } from './styles';
 
 const Checkout: React.FC = () => {
+  const { carItens } = useContext(CarContext);
   return (
     <CheckoutContainer>
       <CheckoutInfos>
@@ -90,15 +91,11 @@ const Checkout: React.FC = () => {
       <CheckoutResume>
         <Title>Cafés selecionados</Title>
         <ResumeCard>
-          <ProductWrapper>
-            <ProductCard />
-          </ProductWrapper>
-          <ProductWrapper>
-            <ProductCard />
-          </ProductWrapper>
-          <ProductWrapper>
-            <ProductCard />
-          </ProductWrapper>
+          {carItens.map((item) => (
+            <ProductWrapper key={item.coffee.id}>
+              <ProductCard data={item} />
+            </ProductWrapper>
+          ))}
           <PricesDescription>
             <TotalItemValueText>
               <span>Total de itens</span>

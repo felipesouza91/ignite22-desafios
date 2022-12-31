@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 import {
   ProductCardContainer,
@@ -10,19 +10,39 @@ import {
   Button,
   PriceText,
 } from './styles';
-import CoffeImage from '../../../assets/Coffee.png';
 import QuantityInput from '../../../components/QuantityInput';
 import { Trash } from 'phosphor-react';
+import { CarContext, Item } from '../../../context/CartContext';
 
-const ProductCard: React.FC = () => {
+interface ProductCartProps {
+  data: Item;
+}
+
+const ProductCard: React.FC<ProductCartProps> = ({ data }) => {
+  const [quantity, setQuantity] = useState(data.quantity);
+  const { addItemToCar } = useContext(CarContext);
+
+  function handleUpdateQuantity(value: number) {
+    console.log(value);
+    console.log(data.quantity);
+    setQuantity(value);
+    addItemToCar({
+      coffee: data.coffee,
+      quantity: value - data.quantity,
+    });
+  }
+
   return (
     <ProductCardContainer>
       <Details>
-        <Image src={CoffeImage} />
+        <Image src={data.coffee.imgUrl} />
         <DetailsSection>
-          <Title>Expresso Tradicional</Title>
+          <Title>{data.coffee.name}</Title>
           <OptionSection>
-            <QuantityInput />
+            <QuantityInput
+              value={quantity}
+              updateQuantity={handleUpdateQuantity}
+            />
             <Button>
               <Trash size={16} />
               REMOVER
@@ -30,7 +50,7 @@ const ProductCard: React.FC = () => {
           </OptionSection>
         </DetailsSection>
       </Details>
-      <PriceText>R$ 9,90</PriceText>
+      <PriceText>R$ {data.coffee.price.toFixed(2)}</PriceText>
     </ProductCardContainer>
   );
 };

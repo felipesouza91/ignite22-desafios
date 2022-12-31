@@ -30,10 +30,6 @@ interface CoffeeDTO {
 const Home: React.FC = () => {
   const [cart, setCart] = useState([]);
 
-  function handleAdcCart(data: any) {
-    console.log(data);
-  }
-
   return (
     <HomeContainer>
       <IntoContainer>
@@ -75,7 +71,7 @@ const Home: React.FC = () => {
       <HomeSubTitle>Nossos Cafés</HomeSubTitle>
       <CoffeeList>
         {data.coffes.map((coffee: CoffeeDTO) => (
-          <CoffeeCard key={coffee.id} data={coffee} onAdd={handleAdcCart} />
+          <CoffeeCard key={coffee.id} data={coffee} />
         ))}
       </CoffeeList>
     </HomeContainer>
