@@ -36,7 +36,7 @@ const CarContextProvider: React.FC<CarContextProviderProps> = ({
     );
     if (cofferExists >= 0) {
       const newData = carItens.map((item) => {
-        if (item.coffee.id === data.coffee.id) {
+        if (item.coffee.id === data.coffee.id && item.quantity != 0) {
           return {
             ...item,
             quantity: item.quantity + data.quantity,
@@ -50,9 +50,6 @@ const CarContextProvider: React.FC<CarContextProviderProps> = ({
     }
   }
   console.log(carItens);
-  function updatePlusQuantity() {}
-  function updateMinusQuantity() {}
-
   return (
     <CarContext.Provider value={{ carItens, addItemToCar }}>
       {children}

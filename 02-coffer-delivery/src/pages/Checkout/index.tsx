@@ -36,6 +36,12 @@ import {
 
 const Checkout: React.FC = () => {
   const { carItens } = useContext(CarContext);
+  const totalProductValue = carItens.reduce(
+    (total, item) => (total += item.coffee.price * item.quantity),
+    0
+  );
+  const deliveryPrice = 3.5;
+  const totalCheckout = totalProductValue + deliveryPrice;
   return (
     <CheckoutContainer>
       <CheckoutInfos>
@@ -99,15 +105,30 @@ const Checkout: React.FC = () => {
           <PricesDescription>
             <TotalItemValueText>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>
+                {Intl.NumberFormat('pt-br', {
+                  currency: 'BRL',
+                  style: 'currency',
+                }).format(totalProductValue)}
+              </span>
             </TotalItemValueText>
             <DeliveryValueText>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>
+                {Intl.NumberFormat('pt-br', {
+                  currency: 'BRL',
+                  style: 'currency',
+                }).format(deliveryPrice)}
+              </span>
             </DeliveryValueText>
             <TotalText>
               <span>Total</span>
-              <span>R$ 33,20</span>
+              <span>
+                {Intl.NumberFormat('pt-br', {
+                  currency: 'BRL',
+                  style: 'currency',
+                }).format(totalCheckout)}
+              </span>
             </TotalText>
           </PricesDescription>
           <Button>CONFIRMAR PEDIDO</Button>

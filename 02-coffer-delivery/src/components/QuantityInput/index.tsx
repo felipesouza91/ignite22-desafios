@@ -17,7 +17,9 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
   }
 
   function handleMinus() {
-    updateQuantity(Number(value) - 1);
+    if (value! != 1) {
+      updateQuantity(Number(value) - 1);
+    }
   }
 
   return (

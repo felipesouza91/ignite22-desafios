@@ -23,8 +23,6 @@ const ProductCard: React.FC<ProductCartProps> = ({ data }) => {
   const { addItemToCar } = useContext(CarContext);
 
   function handleUpdateQuantity(value: number) {
-    console.log(value);
-    console.log(data.quantity);
     setQuantity(value);
     addItemToCar({
       coffee: data.coffee,
