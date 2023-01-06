@@ -6,7 +6,7 @@ interface InputProps {
   isValue?: boolean;
 }
 
-export const CheckoutContainer = styled.div`
+export const CheckoutContainer = styled.form`
   display: grid;
   grid-template-columns: auto 448px;
   column-gap: 32px;

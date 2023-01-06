@@ -56,7 +56,7 @@ export const Text = styled.span`
   line-height: 130%;
 `;
 
-export const AddressForm = styled.form`
+export const AddressForm = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

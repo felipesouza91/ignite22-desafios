@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 
 import {
   Bank,
@@ -25,14 +25,17 @@ import {
   PaymentOption,
 } from './styles';
 import { InputContainer } from '../styles';
-
-interface PaymentType {
-  type: 'CREDIT_CARD' | 'DEBIT_CARD' | 'MONEY';
+import { PaymentType } from '../index';
+interface PaymentFormProp {
+  paymentValue: PaymentType;
+  onChangePayment: (value: PaymentType) => void;
 }
 
-const PaymentForm: React.FC = () => {
-  const [paymentMethod, setPaymentMethod] = useState<PaymentType | null>();
-  const { register, formState } = useForm();
+const PaymentForm: React.FC<PaymentFormProp> = ({
+  onChangePayment,
+  paymentValue,
+}) => {
+  const { register } = useFormContext();
   return (
     <CheckoutInfos>
       <Title>Complete seu pedido</Title>
@@ -85,22 +88,25 @@ const PaymentForm: React.FC = () => {
         </PaymentMessageGroup>
         <PaymentOptions>
           <PaymentOption
-            isSelected={paymentMethod?.type === 'CREDIT_CARD'}
-            onClick={() => setPaymentMethod({ type: 'CREDIT_CARD' })}
+            type="button"
+            isSelected={paymentValue === 'CREDIT_CARD'}
+            onClick={() => onChangePayment('CREDIT_CARD')}
           >
             <CreditCard size={16} />
             CARTÃO DE CREDITO
           </PaymentOption>
           <PaymentOption
-            isSelected={paymentMethod?.type === 'DEBIT_CARD'}
-            onClick={() => setPaymentMethod({ type: 'DEBIT_CARD' })}
+            type="button"
+            isSelected={paymentValue === 'DEBIT_CARD'}
+            onClick={() => onChangePayment('DEBIT_CARD')}
           >
             <Bank size={16} />
             CARTÃO DE DÉBITO
           </PaymentOption>
           <PaymentOption
-            isSelected={paymentMethod?.type === 'MONEY'}
-            onClick={() => setPaymentMethod({ type: 'MONEY' })}
+            type="button"
+            isSelected={paymentValue === 'MONEY'}
+            onClick={() => onChangePayment('MONEY')}
           >
             <Money size={16} />
             DINHEIRO
