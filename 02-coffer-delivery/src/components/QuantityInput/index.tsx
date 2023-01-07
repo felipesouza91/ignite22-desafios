@@ -24,7 +24,7 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
 
   return (
     <QuantityInputGroup>
-      <button onClick={handleMinus}>
+      <button type="button" onClick={handleMinus}>
         <Minus weight="bold" />
       </button>
       <Input
@@ -33,7 +33,7 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
         onChange={(e) => updateQuantity(Number.parseInt(e.target.value))}
         {...rest}
       />
-      <button onClick={handlePlus}>
+      <button type="button" onClick={handlePlus}>
         <Plus weight="bold" />
       </button>
     </QuantityInputGroup>

@@ -1,4 +1,7 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export type PaymentType = 'CREDIT_CARD' | 'DEBIT_CARD' | 'MONEY';
 
 interface Coffee {
   id: string;
@@ -9,6 +12,17 @@ interface Coffee {
   price: number;
 }
 
+interface CheckoutData {
+  cep: string;
+  rua: string;
+  numero: number;
+  complemento?: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
+  paymentMethod: PaymentType;
+}
+
 export interface Item {
   coffee: Coffee;
   quantity: number;
@@ -16,7 +30,9 @@ export interface Item {
 
 interface CarContextData {
   carItens: Item[];
+  checkoutInfo: CheckoutData;
   addItemToCar: (data: Item) => void;
+  finishCheckout: (value: CheckoutData) => void;
 }
 
 interface CarContextProviderProps {
@@ -29,6 +45,9 @@ const CarContextProvider: React.FC<CarContextProviderProps> = ({
   children,
 }) => {
   const [carItens, setCarItens] = useState<Item[]>([]);
+  const [checkoutInfo, setCheckoutInfo] = useState<CheckoutData>(
+    {} as CheckoutData
+  );
 
   function addItemToCar(data: Item) {
     const cofferExists = carItens.findIndex(
@@ -45,13 +64,31 @@ const CarContextProvider: React.FC<CarContextProviderProps> = ({
         return item;
       });
       setCarItens([...newData]);
+      localStorage.setItem('@app:cartItens', JSON.stringify(newData));
     } else {
       setCarItens([...carItens, data]);
+      localStorage.setItem(
+        '@app:cartItens',
+        JSON.stringify([...carItens, data])
+      );
     }
   }
-  console.log(carItens);
+  function finishCheckout(value: CheckoutData) {
+    setCheckoutInfo(value);
+    setCarItens([]);
+    localStorage.removeItem('@app:cartItens');
+  }
+
+  useEffect(() => {
+    const isCartInLocalStorage = localStorage.getItem('@app:cartItens');
+    if (isCartInLocalStorage) {
+      setCarItens(JSON.parse(isCartInLocalStorage));
+    }
+  }, []);
   return (
-    <CarContext.Provider value={{ carItens, addItemToCar }}>
+    <CarContext.Provider
+      value={{ carItens, addItemToCar, checkoutInfo, finishCheckout }}
+    >
       {children}
     </CarContext.Provider>
   );

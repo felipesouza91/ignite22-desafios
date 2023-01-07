@@ -1,5 +1,5 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   SuccessContainer,
@@ -14,8 +14,16 @@ import {
 } from './styles';
 
 import DeliveryManImage from './../../assets/DeliveryMan.png';
+import { CarContext } from '../../context/CartContext';
+
+const PAYMENT = {
+  CREDIT_CARD: 'Cartão de Credito',
+  DEBIT_CARD: 'Cartão de Debito',
+  MONEY: 'Dinheiro',
+};
 
 const Success: React.FC = () => {
+  const { checkoutInfo } = useContext(CarContext);
   return (
     <SuccessContainer>
       <Informations>
@@ -30,9 +38,11 @@ const Success: React.FC = () => {
                 <MapPin weight="fill" />
               </IconWrapper>
               <span>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>{`${checkoutInfo.rua}, ${checkoutInfo.numero}` }</strong>
                 <br />
-                Farrapos - Porto Alegre, RS
+                {checkoutInfo.bairro} - {checkoutInfo.cidade},
+                {checkoutInfo.estado.toUpperCase()}
               </span>
             </SubDescriptionGroup>
             <SubDescriptionGroup>
@@ -51,7 +61,7 @@ const Success: React.FC = () => {
               </IconWrapper>
               <span>
                 Pagamento na entrega
-                <br /> <strong>Cartão de Crédito</strong>
+                <br /> <strong>{PAYMENT[checkoutInfo.paymentMethod]}</strong>
               </span>
             </SubDescriptionGroup>
           </DescriptionContainer>

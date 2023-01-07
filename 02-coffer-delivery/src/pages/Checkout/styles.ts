@@ -129,6 +129,13 @@ export const Button = styled.button`
   &:hover {
     background: ${({ theme }) => theme['yellow-dark']};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+  &:disabled:hover {
+    background: ${({ theme }) => theme.yellow};
+  }
 `;
 
 export const InputContainer = styled.div<InputProps>`

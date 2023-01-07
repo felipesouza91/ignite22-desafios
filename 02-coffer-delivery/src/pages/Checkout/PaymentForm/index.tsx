@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useForm, useFormContext } from 'react-hook-form';
-
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+import { PaymentType } from '../../../context/CartContext';
 import {
   Bank,
   CreditCard,
@@ -25,9 +25,9 @@ import {
   PaymentOption,
 } from './styles';
 import { InputContainer } from '../styles';
-import { PaymentType } from '../index';
+
 interface PaymentFormProp {
-  paymentValue: PaymentType;
+  paymentValue: PaymentType | null;
   onChangePayment: (value: PaymentType) => void;
 }
 
@@ -57,9 +57,14 @@ const PaymentForm: React.FC<PaymentFormProp> = ({
 
           <InlineGroup>
             <InputContainer sizeType="md">
-              <input placeholder="Número" {...register('numero')} />
+              <input
+                placeholder="Número"
+                {...register('numero', {
+                  valueAsNumber: true,
+                })}
+              />
             </InputContainer>
-            <InputContainer sizeType="lg">
+            <InputContainer sizeType="lg" isOptional>
               <input placeholder="Complemento" {...register('complemento')} />
             </InputContainer>
           </InlineGroup>
