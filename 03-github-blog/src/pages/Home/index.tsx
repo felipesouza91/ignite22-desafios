@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { api } from '../../service/api';
+
 import PostTile from './components/PostTile';
 import Profile from './components/Profile';
 
@@ -32,6 +35,11 @@ interface PostDTO {
 const Home: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UseDTO>({} as UseDTO);
   const [post, setPost] = useState<PostDTO[]>([]);
+  const { register, handleSubmit } = useForm();
+
+  function handleSearch(data: any) {
+    loadIssues(data.search);
+  }
 
   async function loadIssues(value = '') {
     const { data } = await api.get(
@@ -56,11 +64,19 @@ const Home: React.FC = () => {
         <PublicationTitle>Pulicação</PublicationTitle>
         <PublicationSubTitle>6 pulicações</PublicationSubTitle>
       </PublicationContainer>
-      <SearchForm>
-        <input type="text" placeholder="Buscar conteúdo" />
+      <SearchForm onSubmit={handleSubmit(handleSearch)}>
+        <input
+          type="text"
+          placeholder="Buscar conteúdo"
+          {...register('search')}
+        />
       </SearchForm>
       <PostContainer>
-        {post.length > 0 && post.map((item) => <PostTile data={item} />)}
+        {post.length > 0 ? (
+          post.map((item) => <PostTile data={item} />)
+        ) : (
+          <h1>Não foi encontrado resultado com os filtros digitados</h1>
+        )}
       </PostContainer>
     </HomeContainer>
   );

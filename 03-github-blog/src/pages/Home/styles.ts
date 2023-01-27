@@ -59,4 +59,9 @@ export const PostContainer = styled.div`
   flex-wrap: wrap;
   gap: 2rem;
   margin-top: 48px;
+
+  h1 {
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme['base-title']};
+  }
 `;

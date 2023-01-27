@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { PostContainer, Header, Title, CreatedAt, Description } from './styles';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 interface Post {
   number: number;
@@ -15,10 +17,15 @@ interface PostTileProps {
 
 const PostTile: React.FC<PostTileProps> = ({ data }) => {
   return (
-    <PostContainer>
+    <PostContainer to={`/post/${data.number}`}>
       <Header>
         <Title>{data.title}</Title>
-        <CreatedAt>Há 1 dia</CreatedAt>
+        <CreatedAt>
+          {formatDistanceToNow(new Date(data.created_at), {
+            locale: ptBR,
+            addSuffix: false,
+          })}
+        </CreatedAt>
       </Header>
       <Description>
         {data.body.length > 200

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from './../../components/Header/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import {
   faCalendarDay,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import ReactMarkdown from 'react-markdown';
 
 import {
   PostContainer,
@@ -20,48 +21,89 @@ import {
   FooterGroup,
   Content,
 } from './styles';
+import { api } from '../../service/api';
+import { Link, useParams } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
+interface PostDTO {
+  title: string;
+  created_at: Date;
+  html_url: string;
+  body: string;
+  user: {
+    login: string;
+  };
+  comments: number;
+}
 
 const Post: React.FC = () => {
+  const [data, setData] = useState<PostDTO>({} as PostDTO);
+  const [status, setStatus] = useState('Carregando');
+  let { id } = useParams();
+
+  async function loadData() {
+    try {
+      const { data } = await api.get(
+        `/repos/felipesouza91/ignite22-desafios/issues/${id}`
+      );
+      setData(data);
+      setStatus('Carregando');
+    } catch {
+      setStatus('Erro ao tentar acessa, recarregue a pagina');
+    }
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <PostContainer>
-      <PostInfo>
-        <PostHeader>
-          <BaseButton>
-            <FontAwesomeIcon icon={faChevronLeft} />
-            VOLTAR
-          </BaseButton>
-          <BaseButton>
-            VER NO GITHUB
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-          </BaseButton>
-        </PostHeader>
-        <Title>JavaScript data types and data structures</Title>
-        <PostFooter>
-          <FooterGroup>
-            <FontAwesomeIcon icon={faGithub} />
-            <span>cameronwll</span>
-          </FooterGroup>
-          <FooterGroup>
-            <FontAwesomeIcon icon={faCalendarDay} />
-            <span>Há 1 dia</span>
-          </FooterGroup>
-          <FooterGroup>
-            <FontAwesomeIcon icon={faComment} />
-            <span>5 comentários</span>
-          </FooterGroup>
-        </PostFooter>
-      </PostInfo>
+      {data.title != undefined ? (
+        <>
+          <PostInfo>
+            <PostHeader>
+              <BaseButton>
+                <FontAwesomeIcon icon={faChevronLeft} />
+                VOLTAR
+              </BaseButton>
+              <Link to={data.html_url}>
+                <BaseButton>
+                  VER NO GITHUB
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                </BaseButton>
+              </Link>
+            </PostHeader>
+            <Title>{data.title}</Title>
+            <PostFooter>
+              <FooterGroup>
+                <FontAwesomeIcon icon={faGithub} />
+                <span>{data.user.login}</span>
+              </FooterGroup>
+              <FooterGroup>
+                <FontAwesomeIcon icon={faCalendarDay} />
+                <span>
+                  {formatDistanceToNow(new Date(data.created_at), {
+                    locale: ptBR,
+                    addSuffix: false,
+                  })}
+                </span>
+              </FooterGroup>
+              <FooterGroup>
+                <FontAwesomeIcon icon={faComment} />
+                <span>{data.comments} comentários</span>
+              </FooterGroup>
+            </PostFooter>
+          </PostInfo>
 
-      <Content>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn. Dynamic typing
-        JavaScript is a loosely typed and dynamic language. Variables in
-        JavaScript are not directly associated with any particular value type,
-        and any variable can be assigned (and re-assigned) values of all types:
-      </Content>
+          <Content>
+            <ReactMarkdown children={data.body} />
+          </Content>
+        </>
+      ) : (
+        <h1>{status}</h1>
+      )}
     </PostContainer>
   );
 };

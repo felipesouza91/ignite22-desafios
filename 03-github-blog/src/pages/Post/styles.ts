@@ -9,6 +9,12 @@ export const PostContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-bottom: 2rem;
+
+  h1 {
+    margin-top: 8rem;
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme['base-title']};
+  }
 `;
 
 export const PostInfo = styled.div`
@@ -80,5 +86,7 @@ export const FooterGroup = styled.div`
 `;
 
 export const Content = styled.div`
+  display: flex;
   padding: 2.5rem 2rem;
+  align-items: flex-start;
 `;

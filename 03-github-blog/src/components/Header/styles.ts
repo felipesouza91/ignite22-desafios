@@ -7,6 +7,12 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 940px) {
+    & {
+      justify-content: center;
+    }
+  }
 `;
 
 export const EffectImg = styled.img`
@@ -18,6 +24,11 @@ export const EffectImg = styled.img`
 
     width: 371px;
     height: 236px;
+  }
+  @media screen and (max-width: 940px) {
+    & {
+      display: none;
+    }
   }
 `;
 export const LogoImg = styled.img`
