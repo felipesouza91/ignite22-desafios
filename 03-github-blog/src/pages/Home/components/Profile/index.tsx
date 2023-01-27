@@ -19,35 +19,48 @@ import {
   ProfileFotterGroup,
 } from './styles';
 
-const Profile: React.FC = () => {
+interface UseDTO {
+  name: string;
+  html_url: string;
+  bio: string;
+  description: string;
+  login: string;
+  company: string;
+  followers: number;
+}
+interface ProfileProps {
+  userData: UseDTO;
+}
+
+const Profile: React.FC<ProfileProps> = ({ userData }) => {
   return (
     <ProfileContainer>
       <ProfileImg src="https://github.com/felipesouza91.png" />
       <ProfileDescription>
         <ProfileDescriptionHeader>
-          <Name>Felipe Souza Santana</Name>
-          <GitHubButton>
-            <span>GITHUB</span>
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-          </GitHubButton>
+          <Name>{userData.name}</Name>
+          {userData.html_url && (
+            <GitHubButton to={userData.html_url}>
+              <span>GITHUB</span>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </GitHubButton>
+          )}
         </ProfileDescriptionHeader>
-        <Description>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </Description>
+        <Description>{userData.bio}</Description>
         <ProfileFooter>
           <ProfileFotterGroup>
             <FontAwesomeIcon icon={faGithub} />
-            <span>cameronwll</span>
+            <span>{userData.login}</span>
           </ProfileFotterGroup>
-          <ProfileFotterGroup>
-            <FontAwesomeIcon icon={faBuilding} />
-            <span>cameronwll</span>
-          </ProfileFotterGroup>
+          {userData.company && (
+            <ProfileFotterGroup>
+              <FontAwesomeIcon icon={faBuilding} />
+              <span>{userData.company}</span>
+            </ProfileFotterGroup>
+          )}
           <ProfileFotterGroup>
             <FontAwesomeIcon icon={faUserGroup} />
-            <span>cameronwll</span>
+            <span>{`${userData.followers} seguidores`}</span>
           </ProfileFotterGroup>
         </ProfileFooter>
       </ProfileDescription>

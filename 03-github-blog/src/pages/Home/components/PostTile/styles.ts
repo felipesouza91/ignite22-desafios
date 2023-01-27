@@ -5,7 +5,7 @@ export const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   padding: 2rem;
   height: 260px;
   background: ${({ theme }) => theme['base-post']};
@@ -17,14 +17,15 @@ export const PostContainer = styled.div`
 `;
 
 export const Header = styled.div`
+  width: 100%;
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  justify-content: space-between;
 `;
 
 export const Title = styled.span`
   width: 80%;
-
   font-size: 1.25rem;
   font-weight: bold;
   color: ${({ theme }) => theme['base-title']};

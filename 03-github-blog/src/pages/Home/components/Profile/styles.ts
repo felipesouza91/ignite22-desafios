@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 export const ProfileContainer = styled.div`
   max-width: 864px;
   height: 221px;
@@ -34,7 +34,7 @@ export const ProfileDescriptionHeader = styled.div`
   width: 100%;
 `;
 
-export const GitHubButton = styled.button`
+export const GitHubButton = styled(Link)`
   background: transparent;
   border: none;
   cursor: pointer;

@@ -6,10 +6,11 @@ import { GlobalStyle } from './styles/global';
 
 import Home from './pages/Home/index';
 import Post from './pages/Post/index';
+import AppRouter from './AppRouter';
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Post />
+      <AppRouter />
       <GlobalStyle />
     </ThemeProvider>
   );
